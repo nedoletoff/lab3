@@ -29,20 +29,21 @@ int func(int a, int b)
 
 int main()
 {
-	if (func(5, 25))
-		printf("First check true\n");
+	int a = 5, b = 25, c = 25, d = 5, e = 0, f = 5;
+	if (func(a, b))
+		printf("Function(%d, %d) = True\n", a, b);
 	else 
-		printf("First check false\n");
+		printf("Function(%d, %d) = False\n", a, b);
 
-	if (!(func(25, 5)))
-		printf("Second check true\n");
+	if (func(c, d))
+		printf("Function(%d, %d) = True\n", c, d);
 	else 
-		printf("Second check false\b");
+		printf("Function(%d, %d) = False\n", c, d);
 
-	if (!(func(0, 25)))
-		printf("Third check true\n");
+	if (func(e, f))
+		printf("Function(%d, %d) = True\n", e, f);
 	else 
-		printf("Third check false\b");
+		printf("Function(%d, %d) = False\n", e, f);
 
 
 	return 0;
