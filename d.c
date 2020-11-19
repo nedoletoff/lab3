@@ -1,6 +1,43 @@
 #include <stdio.h>
 
-int func(int a, int b)
+int meter(char* a)
+{
+	int count = 0;
+	while (a[++count] != '\0');
+//		++count;
+	return count;
+}
+
+
+int conv(char* a)
+{
+	int number = 0;
+	int len = meter(a);
+	if (len > 0 && a[0] != '0')
+		for (int i = 0; i < len; ++i)
+		{
+			number *= 10;
+			number += (a[i] & 0x0F);
+		}
+	else if (len > 1 && a[1] != 'x')
+		for (int i = 1; i < len; ++i)
+		{
+			number *= 8;
+			number += (a[i] & 0x0F);
+		}
+	else if (len > 2 && a[1] == 'x')
+		for (int i = 2; i < len; ++i)
+		{
+			number *= 16;	
+			if (a[i] > '9')
+				number += (a[i] & 0x0F) + 9;
+			else 
+				number += (a[i] & 0x0F);
+		}
+	return number;
+}
+
+int check(int a, int b)
 {	
 	int c = b;
 	int count = 0;
@@ -8,9 +45,11 @@ int func(int a, int b)
 	if (a == 0)
 		return 0;
 
-	while (c > 1)
+	while (c > 1 || c < 0)
 	{
 		c /= a;
+		if (c < 0)
+			c *= -1;
 		++count;
 	}
 
@@ -27,24 +66,38 @@ int func(int a, int b)
 		return 0;
 }
 
+int func(char* a, char* b)
+{
+	int c, d, e;
+	c = conv(a);
+	d = conv(b);
+//	printf("c = %d, d = %d\n", c, d);
+	e = check(c, d);
+	return e;
+}
+
 int main()
 {
-	int a = 5, b = 25, c = 25, d = 5, e = 0, f = 5;
+	char* a = "5";
+       	char* b = "25";
+	char* c = "0x5";
+	char* d = "0x19";
+	char* e = "05";
+	char* f = "031";
 	if (func(a, b))
-		printf("Function(%d, %d) = True\n", a, b);
+		printf("Function(%s, %s) = True\n", a, b);
 	else 
-		printf("Function(%d, %d) = False\n", a, b);
+		printf("Function(%s, %s) = False\n", a, b);
 
 	if (func(c, d))
-		printf("Function(%d, %d) = True\n", c, d);
+		printf("Function(%s, %s) = True\n", c, d);
 	else 
-		printf("Function(%d, %d) = False\n", c, d);
+		printf("Function(%s, %s) = False\n", c, d);
 
 	if (func(e, f))
-		printf("Function(%d, %d) = True\n", e, f);
+		printf("Function(%s, %s) = True\n", e, f);
 	else 
-		printf("Function(%d, %d) = False\n", e, f);
-
+		printf("Function(%s, %s) = False\n", e, f);
 
 	return 0;
 }
