@@ -4,7 +4,6 @@ int meter(char* a)
 {
 	int count = 0;
 	while (a[++count] != '\0');
-//		++count;
 	return count;
 }
 
@@ -71,9 +70,7 @@ int func(char* a, char* b)
 	int c, d, e;
 	c = conv(a);
 	d = conv(b);
-//	printf("c = %d, d = %d\n", c, d);
-	e = check(c, d);
-	return e;
+	return check(c, d);
 }
 
 int main()
