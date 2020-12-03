@@ -167,6 +167,6 @@ int main()
 		printf("Function(%s, %s) = True\n", a, b);
 	else 
 		printf("Function(%s, %s) = False\n", a, b);
-	return 1;
+	return 0;
 }
 
