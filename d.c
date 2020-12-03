@@ -18,11 +18,7 @@ int inputcheck(char* a)
 	{
 		while (++t < len)
 			if (a[t] < '0' || a[t] > '9')
-			{
-				printf("\n%d - %d - ", t, a[t]);
-				puts("1");
 				check = 0;
-			}
 	}
 	else if (a[t] == '0')
 	{
@@ -30,30 +26,18 @@ int inputcheck(char* a)
 		if (a[t] != 'x')
 			while (++t < len)
 				if (a[t] < '0' || a[t] > '7')
-				{
-					puts("2");
 					check = 0;
-				}
-		if (a[t] != 'x' && a[t] == a[t+1] && a[t] == '0')
-			check = 0;
 		if (a[t] == 'x')
 			while (++t < len)
 				if (a[t] < '0' || (a[t] > '9' && a[t] < 'A') || a[t] > 'F')
-				{
-					puts("3");
 					check = 0;
-				}
 	}
 	else 
-	{
-		puts("4");
 		check = 0;
-	}
+	if (!check)
+		puts("Input Error");
 	return check;
 }
-
-			
-
 
 int conv(char* a)
 {
@@ -108,8 +92,6 @@ int conv(char* a)
 			}
 		number = -number;
 	}
-
-
 	return number;
 }
 
@@ -128,9 +110,7 @@ int check(int a, int b)
 			c *= -1;
 		++count;
 	}
-
 	c = 1;
-
 	while (count != 0)
 	{
 		c *= a;
@@ -167,8 +147,7 @@ int main()
 				break;
 			}
 		}	
-	}
-	while (!inputcheck(a));
+	} while (!inputcheck(a));
 
 	do 
 	{
@@ -182,8 +161,7 @@ int main()
 				break;
 			}
 		}	
-	}
-	while (!inputcheck(b));
+	} while (!inputcheck(b));
 
 	if (func(a, b))
 		printf("Function(%s, %s) = True\n", a, b);
@@ -191,3 +169,4 @@ int main()
 		printf("Function(%s, %s) = False\n", a, b);
 	return 1;
 }
+
