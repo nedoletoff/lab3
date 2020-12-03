@@ -34,8 +34,6 @@ int inputcheck(char* a)
 					puts("2");
 					check = 0;
 				}
-		if (a[t] != 'x' && a[t] == a[t+1] && a[t] == '0')
-			check = 0;
 		if (a[t] == 'x')
 			while (++t < len)
 				if (a[t] < '0' || (a[t] > '9' && a[t] < 'A') || a[t] > 'F')
@@ -154,6 +152,10 @@ int main()
 {
 	char a[256];
        	char b[256];
+	char* c = "-0x5";
+	char* d = "-0x7D";
+	char* e = "05";
+	char* f = "031";
 
 	do 
 	{
@@ -189,5 +191,16 @@ int main()
 		printf("Function(%s, %s) = True\n", a, b);
 	else 
 		printf("Function(%s, %s) = False\n", a, b);
-	return 1;
+
+	if (func(c, d))
+		printf("Function(%s, %s) = True\n", c, d);
+	else 
+		printf("Function(%s, %s) = False\n", c, d);
+
+	if (func(e, f))
+		printf("Function(%s, %s) = True\n", e, f);
+	else 
+		printf("Function(%s, %s) = False\n", e, f);
+
+	return 0;
 }
