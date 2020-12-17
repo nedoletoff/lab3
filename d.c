@@ -22,15 +22,19 @@ int inputcheck(char* a)
 	}
 	else if (a[t] == '0')
 	{
+		puts(a);
 		++t;
-		if (a[t] != 'x')
-			while (++t < len)
-				if (a[t] < '0' || a[t] > '7')
-					check = 0;
 		if (a[t] == 'x')
-			while (++t < len)
+		{
+			while (t++ < len)
 				if (a[t] < '0' || (a[t] > '9' && a[t] < 'A') || a[t] > 'F')
 					check = 0;
+		}
+		else
+			while (t < len)
+				if (a[t] < '0' || a[t++] > '7')
+					check = 0;
+
 	}
 	else 
 		check = 0;
@@ -102,6 +106,10 @@ int check(int a, int b)
 
 	if (a == 0)
 		return 0;
+	if (a == 1) 
+		return 1;
+	if (b == 1 && a != 1)
+		return 0;
 
 	while (c > 1 || c < 0)
 	{
@@ -125,9 +133,14 @@ int check(int a, int b)
 int func(char* a, char* b)
 {
 	int c, d;
-	c = conv(a);
-	d = conv(b);
-	return check(c, d);
+	if (inputcheck(a) && inputcheck(b))
+	{
+		c = conv(a);
+		d = conv(b);
+		return check(c, d);
+	}
+	else 
+		return -1;
 }
 
 int main()
@@ -163,9 +176,9 @@ int main()
 		}	
 	} while (!inputcheck(b));
 
-	if (func(a, b))
+	if (func(a, b) == 1)
 		printf("Function(%s, %s) = True\n", a, b);
-	else 
+	else if (func(a, b) == 0)
 		printf("Function(%s, %s) = False\n", a, b);
 	return 0;
 }
