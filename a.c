@@ -74,7 +74,7 @@ int find(int* arr, int len)
 {
         int check = 0;
 	int size = len;
-        for (int k = 1; k < len - 1; k++) //ищем локальные минимумы 
+        for (int k = 1; k < len; k++) //ищем локальные минимумы 
                 if ((arr[k] < arr[k - 1]) && (arr[k] < arr[k + 1]))
                 {
 			erase(arr, size--, k);
