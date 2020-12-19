@@ -24,7 +24,7 @@ int input(int** lst)
 			arr[count % BLOCK_SIZE] = x;
 		if (x && ++count % BLOCK_SIZE == 0)
 		{
-			list = (int**) calloc(((count / BLOCK_SIZE) +1 ), sizeof(int*));
+			list = (int**) calloc(((count / BLOCK_SIZE) + 1 ), sizeof(int*));
 			list[(count / BLOCK_SIZE) - 1] = (int*) calloc(BLOCK_SIZE, sizeof(int));
 
 			for (int i = 0; i < (count / BLOCK_SIZE) - 1; ++i)
@@ -64,16 +64,16 @@ void swap(int* a, int* b)
 
 void erase(int* arr, unsigned int  size, unsigned int number) 
 {
-	arr[number] = 0;
 	for (int i = number; i < size; ++i)
 		swap(&arr[i], &arr[i+1]);
+	arr[size] = 0;
 }
 
 int find(int* arr, int len)
 {
         int check = 0;
 	int size = len;
-        for (int k = 1; k < len; k++) //ищем локальные минимумы 
+        for (int k = 1; k < len; ++k) //ищем локальные минимумы 
                 if ((arr[k] < arr[k - 1]) && (arr[k] < arr[k + 1]))
                 {
 			erase(arr, size--, k);
