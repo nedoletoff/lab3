@@ -35,16 +35,15 @@ int input(int** lst)
 			mas = (int**) list;
 		}
 	}
-	int q = count / BLOCK_SIZE;
 
-	mas[q]= (int*) malloc(count % BLOCK_SIZE * sizeof(int));
+	mas[count / BLOCK_SIZE] = (int*) malloc(count % BLOCK_SIZE * sizeof(int));
 	for (int i = 0; i < count % BLOCK_SIZE; ++i)
-		mas[q][i] = arr[i];
+		mas[count / BLOCK_SIZE][i] = arr[i];
 
 	array = (int*) calloc((count), sizeof(int));
 	for (int i = 0; i < count; ++i)
 		array[i] = mas[i / BLOCK_SIZE][i % BLOCK_SIZE];
-	for (int i = 0; i < q; ++i)
+	for (int i = 0; i <  count / BLOCK_SIZE; ++i)
 	{	
 		free(mas[i]);
 	}
@@ -95,5 +94,6 @@ int main()
         else
                 printf("The array does not contain local minima");
 	putchar('\n');
+	free(arr);
         return 0;
 }
