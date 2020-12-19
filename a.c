@@ -3,7 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* input(int* len)
+void _swap(int** a, int** b)                                         {                                                                         int* temp = *a;                                                    *a = *b;                                                          *b = temp;                                                }
+
+int input(int** lst)
 {
 	int count = 0;
 	int x = 1;
@@ -40,17 +42,18 @@ int* input(int* len)
 	for (int i = 0; i < count % BLOCK_SIZE; ++i)
 		mas[q][i] = arr[i];
 
-	array = (int*) malloc((count) * sizeof(int));
+	array = (int*) calloc((count), sizeof(int));
 	for (int i = 0; i < count; ++i)
 		array[i] = mas[i / BLOCK_SIZE][i % BLOCK_SIZE];
 	for (int i = 0; i < q; ++i)
-	{
+	{	
 		free(mas[i]);
 	}
 	free(mas);
 
-	*len = count - 1;
-	return array;
+	*lst =  array;
+
+	return count-1;
 
 }
 
@@ -85,7 +88,8 @@ int find(int* arr, int len)
 int main()
 {
         int  len = 0;
-	int* arr = input(&len);
+	int* arr = NULL;
+	len = input(&arr);
         if (find(arr, len) != 0)
                 for (int i = 0; i <= len; i++)
                         printf("%d ", arr[i]);
